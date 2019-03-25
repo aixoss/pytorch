@@ -14,7 +14,7 @@ Steps to build and install pytorch from source:
 
 - cd pytorch
 
-- ./aix_setup.sh
+- source ./aix_setup.sh
 
 - USE_DISTRIBUTED=OFF python setup.py install
 
