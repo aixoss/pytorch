@@ -138,7 +138,7 @@ else
     if [[ $USE_ROCM -eq 1 ]]; then
         LDFLAGS="$LDFLAGS -Wl,-rpath,\\\\\\\$ORIGIN"
     else
-        LDFLAGS="$LDFLAGS -Wl,-rpath,\$ORIGIN"
+        LDFLAGS="$LDFLAGS "
     fi
 fi
 CPP_FLAGS=" -std=c++11 "
@@ -153,7 +153,8 @@ if [[ -z "$CUDA_DEVICE_DEBUG" ]]; then
   CUDA_DEVICE_DEBUG=0
 fi
 if [ -z "$MAX_JOBS" ]; then
-  MAX_JOBS="$(getconf _NPROCESSORS_ONLN)"
+#  MAX_JOBS="$(getconf _NPROCESSORS_ONLN)"
+  MAX_JOBS="$(lparstat -i | awk '/Online.*CPUs/ {print $5}')"
 fi
 
 BUILD_TYPE="Release"
@@ -196,7 +197,7 @@ function build_caffe2() {
   fi
 
   if [[ $RERUN_CMAKE -eq 1 ]] || [ ! -f CMakeCache.txt ]; then
-      ${CMAKE_COMMAND} $BASE_DIR \
+      ${CMAKE_COMMAND} --trace $BASE_DIR \
 		       ${CMAKE_GENERATOR} \
 		       -DPYTHON_EXECUTABLE=$PYTORCH_PYTHON \
 		       -DPYTHON_LIBRARY="${PYTORCH_PYTHON_LIBRARY}" \
