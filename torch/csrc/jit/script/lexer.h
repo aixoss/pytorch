@@ -166,8 +166,9 @@ struct SharedParserData {
 #else
   static double strtod_c(const char * str, char** end) {
     /// NOLINTNEXTLINE(hicpp-signed-bitwise)
-    static locale_t loc = newlocale(LC_ALL_MASK, "C", nullptr);
-    return strtod_l(str, end, loc);
+//    static locale_t loc = newlocale(LC_ALL_MASK, "C", nullptr);
+//    return strtod_l(str, end, loc);
+    return strtod(str, end);
   }
 #endif
   // 1. skip whitespace

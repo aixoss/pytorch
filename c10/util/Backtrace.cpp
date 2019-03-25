@@ -15,7 +15,10 @@
 // No backtrace on mobile, windows and emscripten platforms.
 #define SUPPORTS_BACKTRACE 0
 #else
-#define SUPPORTS_BACKTRACE 1
+#define SUPPORTS_BACKTRACE 0
+#endif
+
+#if SUPPORTS_BACKTRACE 
 #include <cxxabi.h>
 #include <execinfo.h>
 #endif

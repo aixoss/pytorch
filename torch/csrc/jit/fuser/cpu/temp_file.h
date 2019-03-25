@@ -21,7 +21,8 @@ struct TempFile {
     // mkstemps edits its first argument in places
     // so we make a copy of the string here, including null terminator
     std::vector<char> tt(t.c_str(), t.c_str() + t.size() + 1);
-    int fd = mkstemps(tt.data(), suffix);
+/*    int fd = mkstemps(tt.data(), suffix);*/
+    int fd = mkstemp(tt.data());
     JIT_ASSERT(fd != -1);
     file_ = fdopen(fd, "r+");
 

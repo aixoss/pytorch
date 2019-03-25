@@ -58,13 +58,13 @@ namespace test_true_for_each_type {
     static_assert(!true_for_each_type<std::is_reference, typelist<int&, const float, const MyClass&>>::value, "");
     static_assert(true_for_each_type<std::is_reference, typelist<>>::value, "");
 }
-
+/*
 namespace test_map {
     class MyClass {};
     static_assert(std::is_same<typelist<>, map_t<c10::guts::add_lvalue_reference_t, typelist<>>>::value, "");
     static_assert(std::is_same<typelist<int&>, map_t<c10::guts::add_lvalue_reference_t, typelist<int>>>::value, "");
     static_assert(std::is_same<typelist<int&, double&, const MyClass&>, map_t<c10::guts::add_lvalue_reference_t, typelist<int, double, const MyClass>>>::value, "");
-}
+}*/
 
 namespace test_head {
     class MyClass {};

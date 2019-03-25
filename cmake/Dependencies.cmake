@@ -300,7 +300,8 @@ if(BUILD_TEST)
       set(gtest_force_shared_crt ON CACHE BOOL "force shared crt on gtest" FORCE)
   endif()
   add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../third_party/googletest)
-  include_directories(SYSTEM ${CMAKE_CURRENT_LIST_DIR}/../third_party/googletest/googletest/include)
+#  include_directories(SYSTEM ${CMAKE_CURRENT_LIST_DIR}/../third_party/googletest/googletest/include)
+  include_directories(${CMAKE_CURRENT_LIST_DIR}/../third_party/googletest/googletest/include)
 
   # We will not need to test benchmark lib itself.
   set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "Disable benchmark testing as we don't need it.")
@@ -493,7 +494,8 @@ else()
   message(STATUS "Using third party subdirectory Eigen.")
   set(EIGEN3_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR}/../third_party/eigen)
 endif()
-include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
+#include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
+include_directories(${EIGEN3_INCLUDE_DIR})
 
 # ---[ Python + Numpy
 if(BUILD_PYTHON)
@@ -592,7 +594,8 @@ if(pybind11_FOUND)
     include_directories(SYSTEM ${pybind11_INCLUDE_DIRS})
 else()
     message(STATUS "Using third_party/pybind11.")
-    include_directories(SYSTEM ${CMAKE_CURRENT_LIST_DIR}/../third_party/pybind11/include)
+#    include_directories(SYSTEM ${CMAKE_CURRENT_LIST_DIR}/../third_party/pybind11/include)
+    include_directories(${CMAKE_CURRENT_LIST_DIR}/../third_party/pybind11/include)
 endif()
 
 # ---[ MPI
@@ -977,12 +980,14 @@ if (CAFFE2_CMAKE_BUILDING_WITH_MAIN_REPO)
   add_definitions(-DONNX_NAMESPACE=${ONNX_NAMESPACE})
   # In mobile build we care about code size, and so we need drop
   # everything (e.g. checker, optimizer) in onnx but the pb definition.
-  if (ANDROID OR IOS)
-    caffe2_interface_library(onnx_proto onnx_library)
-  else()
+#  if (ANDROID OR IOS)
+#    caffe2_interface_library(onnx_proto onnx_library)
+#  else()
     caffe2_interface_library(onnx onnx_library)
-  endif()
+#  endif()
   list(APPEND Caffe2_DEPENDENCY_WHOLE_LINK_LIBS onnx_library)
+#  caffe2_interface_library(onnx_proto onnx_proto_library)
+#  list(APPEND Caffe2_DEPENDENCY_WHOLE_LINK_LIBS onnx_proto_library) 
   list(APPEND Caffe2_DEPENDENCY_LIBS onnxifi_loader)
   # Recover the build shared libs option.
   set(BUILD_SHARED_LIBS ${TEMP_BUILD_SHARED_LIBS})

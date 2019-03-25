@@ -1,5 +1,7 @@
 #pragma once
 
+#undef RAW
+
 namespace torch { namespace onnx {
 
 enum class OperatorExportTypes {
@@ -9,3 +11,5 @@ enum class OperatorExportTypes {
   RAW, // Raw export (no ONNX)
 };
 }} // namespace torch::onnx
+
+

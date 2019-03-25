@@ -43,7 +43,7 @@ enum SIMDExtensions
 {
 #if defined(__NEON__)
   SIMDExtension_NEON    = 0x1,
-#elif defined(__PPC64__)
+#elif defined(__PPC64__) || defined(__PPC__)
   SIMDExtension_VSX     = 0x1,
 #else
   SIMDExtension_AVX2    = 0x1,
@@ -72,7 +72,7 @@ static inline uint32_t detectHostSIMDExtensions()
 
  #endif
 
-#elif defined(__PPC64__)
+#elif defined(__PPC64__) || defined(__PPC__)
 
  #if defined(__VSX__)
 

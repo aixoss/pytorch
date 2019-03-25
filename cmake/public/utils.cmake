@@ -29,6 +29,14 @@ macro(caffe2_interface_library SRC DST)
       # In MSVC, we will add whole archive in default.
       target_link_libraries(
           ${DST} INTERFACE -WHOLEARCHIVE:$<TARGET_FILE:${SRC}>)
+    elseif(CMAKE_SYSTEM_NAME STREQUAL "AIX")
+#     target_link_libraries(${DST} INTERFACE "-Wl,-bkeepfile:$<TARGET_FILE:${SRC}>")
+     get_target_property(lib_sources ${SRC} SOURCES)
+     message(${SRC} ${lib_sources})
+     list(APPEND Caffe2_CPU_SRCS ${lib_sources})   
+     message(${SRC} ${Caffe2_CPU_SRCS})
+#     get_target_property(lib_includes ${SRC} INCLUDE_DIRECTORIES)
+#     list(APPEND Caffe2_CPU_INCLUDE ${lib_includes}) 
     else()
       # Assume everything else is like gcc
       target_link_libraries(${DST} INTERFACE
@@ -54,7 +62,7 @@ macro(caffe2_interface_library SRC DST)
     target_link_libraries(${DST} INTERFACE
         $<TARGET_PROPERTY:${SRC},LINK_LIBRARIES>)
   elseif(${__src_target_type} STREQUAL "SHARED_LIBRARY")
-    if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
+    if((NOT CMAKE_SYSTEM_NAME STREQUAL AIX) AND "${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
       target_link_libraries(${DST} INTERFACE
           "-Wl,--no-as-needed,$<TARGET_FILE:${SRC}> -Wl,--as-needed")
     else()

@@ -749,7 +749,8 @@ def make_relative_rpath(path):
     elif IS_WINDOWS:
         return ''
     else:
-        return '-Wl,-rpath,$ORIGIN/' + path
+#        return '-Wl,-rpath,$ORIGIN/' + path
+        return path
 
 ################################################################################
 # Declare extensions and package
@@ -764,7 +765,8 @@ C = Extension("torch._C",
               extra_compile_args=main_compile_args + extra_compile_args,
               include_dirs=[],
               library_dirs=library_dirs,
-              extra_link_args=extra_link_args + main_link_args + [make_relative_rpath('lib')],
+#              extra_link_args=extra_link_args + main_link_args + [make_relative_rpath('lib')],
+              extra_link_args=extra_link_args + main_link_args,
               )
 extensions.append(C)
 

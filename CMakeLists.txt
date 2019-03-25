@@ -14,6 +14,14 @@ endif()
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+foreach(step CREATE APPEND FINISH)
+  string(REPLACE "<CMAKE_AR>" "<CMAKE_AR> -X32_64"
+    CMAKE_C_ARCHIVE_${step} "${CMAKE_C_ARCHIVE_${step}}")
+  string(REPLACE "<CMAKE_AR>" "<CMAKE_AR> -X32_64"
+    CMAKE_CXX_ARCHIVE_${step} "${CMAKE_CXX_ARCHIVE_${step}}")
+endforeach()
+
+
 # One variable that determines whether the current cmake process is being run
 # with the main Caffe2 library. This is useful for building modules - if
 # modules are built with the main Caffe2 library then one does not need to do
