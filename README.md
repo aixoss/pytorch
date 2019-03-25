@@ -10,7 +10,7 @@ Install Dependencies:
 
 Steps to build and install pytorch from source:
 
-- git clone --recursive https://github.com/pytorch/pytorch.git
+- git clone --recursive https://github.com/kavanabhat/pytorch.git -b v1.0.1
 
 - cd pytorch
 
