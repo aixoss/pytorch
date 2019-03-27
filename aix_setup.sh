@@ -10,3 +10,4 @@ export CFLAGS="-mvsx -maix64"
 export CXX='g++ -L/opt/freeware/lib/pthread/ppc64 -lstdc++ -pthread'
 export LDFLAGS='-latomic -lpthread -Wl,-bbigtoc'
 export CC="gcc -L/opt/freeware/lib/pthread/ppc64 -pthread -maix64 -mvsx"
+ulimit -d unlimited
