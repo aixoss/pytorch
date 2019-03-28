@@ -7,6 +7,7 @@ To install/uninstall Pytorch On AIX
 Install Dependencies:
 
 - pip install setuptools six future PyYAML numpy protobuf
+- yum install lapack lapack-devel openblas
 
 Steps to build and install pytorch from source:
 
